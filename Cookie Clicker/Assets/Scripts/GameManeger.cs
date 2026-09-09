@@ -6,8 +6,11 @@ public class GameManeger : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI CookieCount;
+    
     [SerializeField] int Cookies;
     [SerializeField] Animator CanvesAnimator;
+    [SerializeField] int GrandmaCost;
+    [SerializeField] int Grandmas;
 
     // int Cookies;
 
@@ -23,16 +26,28 @@ public class GameManeger : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        
-        if(timer >= 1)
+        if (Grandmas >= 1)
         {
-            timer = 0;
-            Cookies += +1;
-            CookieCount.text = Cookies.ToString();
+            if (timer >= 1)
+            {
+                timer = 0;
+                Cookies += +Grandmas;
+                CookieCount.text = Cookies.ToString();
+            }
         }
+       
     }
     public void BuyGrandma()
     {
+        if(Cookies >= GrandmaCost)
+        {
+            Cookies -= GrandmaCost;
+            CookieCount.text = Cookies.ToString();
+            Grandmas += 1;
+            
+            GrandmaCost += 10;
 
+        }
     }
+
 }
